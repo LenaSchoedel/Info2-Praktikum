@@ -32,7 +32,7 @@ int main(void)
 
     while (laenge<0 || laenge>1000); // Bereichsabfrage
 
-    srand(time(NULL));// Initialisierung des Zufallszahlengenerators (aktuell)
+    srand(time(NULL)); // Initialisierung des Zufallszahlengenerators (aktuell)
 
 // Generieren der Zufallsfolge – jedes Element ist entweder 0 oder 1
     for (a=1; a<=laenge; a++)
@@ -67,19 +67,19 @@ int main(void)
 //
 
 
-int generiere_neue_folge(int laenge, int folge[])
+int generiere_neue_folge(int laenge, int *folge)
 {
     int i, j;
     // Vergleich zweier aufeinanderfolgender Bits:
     // Wenn sie gleich sind → !(1) = 0
     // Wenn sie unterschiedlich sind → !(0) = 1
     for (i=1,j=1; i<laenge; i+=2,j++)
-        folge[j] = !(folge[i] == folge[i+1]);
+        *(folge+j) = !(*(folge + i)) == *(folge + i +1);
 
     // ein einzelnes Element bleibt übrig
     // wird unverändert übernommen
     if (i == laenge)
-        folge[j] = folge[laenge];
+        *(folge+j) = *(folge + laenge);
     else
         j--; // Wenn nichts übernommen wurde, muss j wieder reduziert werden
     return(j);
